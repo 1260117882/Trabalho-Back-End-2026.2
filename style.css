@@ -1,0 +1,12 @@
+.navbar {
+    min-height: 100px;
+}
+
+.navbar-brand {
+    font-size: 1.5rem;
+}
+
+.carousel-item img {
+    height: 450px;
+    object-fit: cover;
+}
