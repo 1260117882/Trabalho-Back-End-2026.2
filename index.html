@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="pt-br">
+
+  <head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Aluguel de Filmes</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+
+  </head>
+
+  <body>
+
+    <nav class="navbar sticky-top navbar-dark bg-dark" id="inicio">
+      <div class="container-fluid">
+        <div class="navbar-nav d-flex flex-row gap-4 mx-auto">
+
+          <a class="nav-link text-uppercase" href="index.html">Início</a>
+          <a class="nav-link text-uppercase" href="#como-funciona">Guia</a>
+          <a class="nav-link text-uppercase" href="#catalogo">Catálogo</a>
+          <a class="nav-link text-uppercase" href="#meusfilmes">Meus filmes</a>
+
+        </div>
+
+      <div class="navbar-nav d-flex flex-row gap-4">
+
+        <a href="login.html" class="text-white fs-4"><i class="bi bi-person-circle"></i></a>
+        <a href="#buscartitulo" class="text-white fs-4"><i class="bi bi-search"></i></a>
+        <a href="#notificacoes" class="text-white fs-4"><i class="bi bi-bell"></i></a>
+        <a href="#carrinho" class="text-white fs-4 me-3"><i class="bi bi-cart"></i></a>
+
+      </div>
+    </nav>
+
+    <section id="inicio">
+      <div id="carouselFilmes" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+
+          <button type="button"
+          data-bs-target="#carouselFilmes"
+          data-bs-slide-to="0"
+          class="active"
+          aria-current="true"
+          aria-label="Slide 1">
+          </button>
+          
+          <button type="button"
+          data-bs-target="#carouselFilmes"
+          data-bs-slide-to="1"
+          aria-label="Slide 2">
+          </button>
+          
+          <button type="button"
+          data-bs-target="#carouselFilmes"
+          data-bs-slide-to="2"
+          aria-label="Slide 3">
+          </button>
+
+        </div>       
+
+    <div class="carousel-inner">
+
+      <div class="carousel-item active">
+        <img src="imagens/filme1.jpg" class="d-block w-100" alt="Filme 1">
+      </div>
+
+      <div class="carousel-item">
+        <img src="imagens/filme2.jpg" class="d-block w-100" alt="Filme 2">
+      </div>
+
+      <div class="carousel-item">
+        <img src="imagens/filme3.jpg" class="d-block w-100" alt="Filme 3">
+      </div>
+
+    </div>
+
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselFilmes" data-bs-slide="prev">      
+      <span class="carousel-control-prev-icon"></span>
+      <span class="visually-hidden">Anterior</span>
+      </button>
+
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselFilmes" data-bs-slide="next">       
+      <span class="carousel-control-next-icon"></span>
+      <span class="visually-hidden">Próximo</span>
+      </button>
+
+      </div>
+      </div>
+    </section>
+
+       <section class="py-5 bg-custom-light text-center" id="como-funciona">
+
+        <div class="container-fluid">
+          
+          <h2 class="fw-semibold mb-5 title-accent">Como funciona o aluguel?</h2>
+
+            <div class="row g-4 justify-content-center">
+              <div class="col-md-5">
+                <div class="p-3">
+                  <div class="mb-3 text-custom">
+                    
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                    width="48"
+                    height="48"
+                    viewBox="0 0 48 48"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.4"
+                    stroke-linecap="round"
+                    stroke-linejoin="round">
+                    
+                    <rect x="6" y="10" width="36" height="28" rx="3"/>
+                    <path d="M6 18h36"/>
+                    <path d="M18 28l8 5v-10l-8 5z"/>
+
+                    </svg>
+                  </div>
+
+          <h3 class="h5 fw-bold mb-2">Escolha seu filme</h3>
+          <p class="text-muted small">Navegue pelo nosso catálogo, escolha seu filme favorito e confira as informações antes de realizar o aluguel.</p>
+
+                </div>
+              </div>
+
+      <div class="col-md-5">      
+        <div class="p-3">
+          <div class="mb-3 text-custom">
+            
+            <svg xmlns="http://www.w3.org/2000/svg"
+            width="48"
+            height="48"
+            viewBox="0 0 48 48"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.4"
+            stroke-linecap="round"
+            stroke-linejoin="round">
+            
+            <rect x="8" y="6" width="32" height="36" rx="3"/>
+            <path d="M16 14h16"/>
+            <path d="M16 21h16"/>
+            <path d="M16 28h10"/>
+
+            </svg>
+          </div>     
+
+          <h3 class="h5 fw-bold mb-2">Alugue e assista</h3>
+          <p class="text-muted small">Faça seu cadastro, alugue o título escolhido e aproveite o filme durante o período de locação.</p>
+
+        </div>
+      </div>  
+
+            </div>
+       </section>
+
+  <footer class="py-5 bg-dark text-light mt-auto">
+    
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-md-4">
+          
+          <h2 class="h4 fw-bold mb-3 text-white">Aluga Filmes</h2>
+          <p class="text-white small">© 2026 Aluga Filmes<br>Todos os direitos reservados.</p>
+
+        </div>
+
+      <div class="col-md-4">
+
+        <h4 class="h6 text-uppercase fw-bold text-white mb-3">Contato</h4>
+
+        <p class="text-white small mb-2 d-flex align-items-center gap-2">
+          <i class="bi bi-telephone"></i>
+          <a href="tel:+5521999999999" class="text-white text-decoration-none">(21) 99999-9999</a>
+        </p>
+
+        <p class="text-white small mb-2 d-flex align-items-center gap-2">
+          <i class="bi bi-whatsapp"></i>
+          <a href="https://wa.me/5521999999999" target="_blank" class="text-white text-decoration-none">WhatsApp</a>
+        </p>
+
+        <p class="text-white small mb-2 d-flex align-items-center gap-2">
+          <i class="bi bi-envelope"></i>
+          <a href="mailto:contato@alugafilmes.com.br" class="text-white text-decoration-none">contato@alugafilmes.com.br</a>
+        </p>          
+    
+      <div class="col-md-4">
+        
+        <h4 class="h6 text-uppercase fw-bold text-white mb-3">Redes Sociais</h4>
+        
+          <div class="d-flex flex-column gap-2 small">
+
+            <p class="text-white mb-0 d-flex align-items-center gap-2">
+              <i class="bi bi-instagram"></i>              
+              <a href="#" class="text-white text-decoration-none">Instagram</a>
+            </p>
+            
+            <p class="text-white mb-0 d-flex align-items-center gap-2">
+              <i class="bi bi-facebook"></i>              
+              <a href="#" class="text-white text-decoration-none">Facebook</a>
+            </p>
+          
+            <p class="text-white mb-0 d-flex align-items-center gap-2">
+              <i class="bi bi-twitter-x"></i>
+              <a href="#" class="text-white text-decoration-none">X</a>
+            </p>
+
+          </div>
+      </div>
+     
+      </div>
+    </div>      
+
+  </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  </body>
+
+</html>
