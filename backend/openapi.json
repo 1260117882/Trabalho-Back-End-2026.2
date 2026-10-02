@@ -1,0 +1,163 @@
+{
+    "openapi": "3.1.0",
+    "info": {
+        "title": "OpenAPI definition",
+        "version": "v0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8080",
+            "description": "Generated server url"
+        }
+    ],
+    "tags": [
+        {
+            "name": "Filmes",
+            "description": "Catálogo de filmes para aluguel"
+        }
+    ],
+    "paths": {
+        "/api/filmes": {
+            "get": {
+                "tags": [
+                    "Filmes"
+                ],
+                "summary": "Lista todos os filmes",
+                "operationId": "listar",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Filme"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Filmes"
+                ],
+                "summary": "Cadastra um novo filme",
+                "operationId": "criar",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Filme"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "400": {
+                        "description": "Dados inválidos",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Filme"
+                                }
+                            }
+                        }
+                    },
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Filme"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/filmes/{id}": {
+            "get": {
+                "tags": [
+                    "Filmes"
+                ],
+                "summary": "Busca um filme pelo id",
+                "operationId": "buscar",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "404": {
+                        "description": "Filme não encontrado",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Filme"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Filme": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "titulo": {
+                        "type": "string",
+                        "minLength": 1
+                    },
+                    "sinopse": {
+                        "type": "string"
+                    },
+                    "genero": {
+                        "type": "string"
+                    },
+                    "anoLancamento": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "duracaoMinutos": {
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    "classificacao": {
+                        "type": "string"
+                    },
+                    "imagemUrl": {
+                        "type": "string"
+                    },
+                    "precoAluguel": {
+                        "type": "number"
+                    },
+                    "disponivel": {
+                        "type": "boolean"
+                    }
+                },
+                "required": [
+                    "precoAluguel",
+                    "titulo"
+                ]
+            }
+        }
+    }
+}
