@@ -1,0 +1,12 @@
+{
+  "name": "Trabalho-Back-End-2026.2",
+  "version": "1.0.0",
+  "description": "Trabalho de Back End de um sistema de aluguel de filmes",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  }
+}
