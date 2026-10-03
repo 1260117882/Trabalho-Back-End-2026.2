@@ -1,4 +1,7 @@
+  # Orquestra os 3 containers: banco (db) -> API (backend) -> site (frontend)
 services:
+
+  # Banco de dados
   db:
     image: postgres:16-alpine
     container_name: aluguel_db
@@ -8,16 +11,42 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
       POSTGRES_DB: ${POSTGRES_DB}
     ports:
-      - "${DB_PORT:-5432}:5432"
+      - "${DB_PORT:-5432}:5432"            # host:container (só para acessar de fora, ex.: DBeaver)
     volumes:
-      - .pgdata:/var/lib/postgresql/data
+      - pgdata:/var/lib/postgresql/data    # mantém os dados entre reinícios
+      # Scripts executados SÓ na primeira criação do banco, em ordem alfabética (01-, 02-...)
       - ./database/init:/docker-entrypoint-initdb.d:ro
-    healthcheck:
+    healthcheck:                           # só fica "healthy" quando o Postgres aceita conexões
       test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
       interval: 5s
       timeout: 5s
       retries: 10
 
+  # API Spring Boot
+  backend:
+    build: ./backend
+    container_name: aluguel_backend
+    restart: unless-stopped
+    environment:
+      # Dentro da rede do Docker o host do banco é o NOME DO SERVIÇO ("db"), não localhost
+      # A porta é sempre 5432 aqui dentro (DB_PORT só afeta o lado do host)
+      # Estas variáveis sobrescrevem o application.properties
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/${POSTGRES_DB}
+      SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "${BACKEND_PORT:-8080}:8080"
+    depends_on:
+      db:
+        condition: service_healthy         # só inicia depois que o banco estiver pronto
+    healthcheck:                           # "healthy" quando a documentação OpenAPI responde
+      test: ["CMD-SHELL", "wget -qO- http://localhost:8080/v3/api-docs > /dev/null || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 30s                    # tempo de boot do Spring antes de contar falhas
+
+  # Frontend (Node/Express)
   frontend:
     build: ./frontend
     container_name: aluguel_frontend
@@ -28,10 +57,10 @@ services:
     ports:
       - "${FRONTEND_PORT:-3000}:3000"
     volumes:
-      - ./frontend/public:/app/public
+      - ./frontend/public:/app/public      # editar HTML/CSS reflete sem rebuild
     depends_on:
-      db:
+      backend:
         condition: service_healthy
 
 volumes:
-  .pgdata:
+  pgdata:                                  # volume nomeado gerenciado pelo Docker
