@@ -1,5 +1,5 @@
 -- =====================================================================
--- schema.sql
+-- 01-schema.sql
 -- Criação da estrutura do banco de dados (PostgreSQL)
 -- Origem dos campos: telas de Login e Cadastro do front-end.
 -- =====================================================================
@@ -7,7 +7,8 @@
 -- Extensão para funções de criptografia (usada no data.sql para gerar hash de senha).
 CREATE EXTENSION IF NOT EXISTS pgcrypto;
 
--- Remove a tabela caso já exista, permitindo rodar o script várias vezes.
+-- Remove as tabelas caso já existam, permitindo rodar o script várias vezes.
+DROP TABLE IF EXISTS filmes;
 DROP TABLE IF EXISTS usuarios;
 
 -- ---------------------------------------------------------------------
@@ -66,3 +67,46 @@ CREATE TABLE usuarios (
 -- Garante e-mail único sem diferenciar maiúsculas/minúsculas
 -- (ex.: "Ana@x.com" e "ana@x.com" são o mesmo e-mail). Também acelera o login.
 CREATE UNIQUE INDEX uq_usuarios_email_lower ON usuarios (LOWER(email));
+
+-- ---------------------------------------------------------------------
+-- TABELA: filmes
+-- Finalidade: catálogo de filmes disponíveis para aluguel temporário.
+-- É lida pela API (GET /api/filmes) para montar o catálogo do site.
+-- ---------------------------------------------------------------------
+CREATE TABLE filmes (
+
+    -- Identificador único e automático de cada filme (chave primária).
+    id               BIGSERIAL PRIMARY KEY,
+
+    -- Título exibido no catálogo. Obrigatório.
+    titulo           VARCHAR(200) NOT NULL,
+
+    -- Resumo da história, exibido na página do filme.
+    sinopse          TEXT,
+
+    -- Gênero principal (ex.: "Ficção científica"), usado nos filtros.
+    genero           VARCHAR(80),
+
+    -- Ano de lançamento da obra.
+    ano_lancamento   INTEGER,
+
+    -- Duração total do filme, em minutos.
+    duracao_minutos  INTEGER,
+
+    -- Classificação indicativa (ex.: "10", "14", "L"). Texto para aceitar "L".
+    classificacao    VARCHAR(10),
+
+    -- Nome do arquivo ou URL da capa (ex.: "filme1.jpg").
+    imagem_url       VARCHAR(500),
+
+    -- Preço do aluguel temporário, em reais. Obrigatório e maior que zero.
+    preco_aluguel    NUMERIC(8,2) NOT NULL,
+
+    -- Indica se o filme está disponível para aluguel no momento.
+    disponivel       BOOLEAN NOT NULL DEFAULT TRUE,
+
+    -- Data/hora em que o filme foi cadastrado (preenchida automaticamente).
+    criado_em        TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+
+    CONSTRAINT ck_filmes_preco_positivo CHECK (preco_aluguel > 0)
+);
