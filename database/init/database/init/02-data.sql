@@ -1,5 +1,5 @@
 -- =====================================================================
--- data.sql
+-- 02-data.sql
 -- Dados de teste para a tabela usuarios (execute DEPOIS do schema.sql).
 -- As senhas são geradas com crypt() + gen_salt('bf') (pgcrypto), que produz
 -- hash bcrypt, o mesmo padrão que o back-end deve usar.
@@ -19,6 +19,14 @@ VALUES
 INSERT INTO usuarios (nome_completo, email, data_nascimento, telefone, senha_hash, ativo)
 VALUES
     ('Fábio Inativo Teste', 'fabio.inativo@email.com', '1988-05-30', '21955443322', crypt('Senha@123', gen_salt('bf')), FALSE);
+
+-- ---------------------------------------------------------------------
+-- Filme de exemplo para o catálogo (tabela filmes).
+-- Colunas: titulo, sinopse, genero, ano_lancamento, duracao_minutos,
+-- classificacao, imagem_url, preco_aluguel
+-- ---------------------------------------------------------------------
+INSERT INTO filmes (titulo, sinopse, genero, ano_lancamento, duracao_minutos, classificacao, imagem_url, preco_aluguel)
+VALUES ('Interestelar', 'Exploradores viajam por um buraco de minhoca.', 'Ficção científica', 2014, 169, '10', 'filme1.jpg', 9.90);
 
 -- ---------------------------------------------------------------------
 -- Consulta de exemplo para validar o login (senha correta retorna 1 linha):
