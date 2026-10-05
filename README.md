@@ -81,4 +81,12 @@ O `docker-compose.yml` define uma ordem de inicialização:
 
 # Equipe
 
-- (nome e função)
+- Bruno Azevedo (1260129791)
+- Isabela Damasceno de Andrade (1260114698)
+- José Vitor dos Santos Cruz (1260214328)
+- Letícia  Bittencourt de Oliveira (1260117882)
+- Lucia Helena Cortez Neves (1260119405)
+- Nathalya Siothé (1260123210)
+
+  Turno: Manhã
+  Turma: 4169ADSM1A2
